@@ -136,19 +136,27 @@ class NewBookForm extends Component {
     return (
       <form onSubmit={ this.submitForm }>
         <p>Book Title: 
-          <abbr title="This field is mandatory" aria-label="required">*</abbr> 
+          <abbr title="This field is mandatory" aria-label="required">
+            {' '}*{' '}
+          </abbr> 
           <input type="text" name="title" required />
         </p>
         <p>Author: 
-          <abbr title="This field is mandatory" aria-label="required">*</abbr> 
+          <abbr title="This field is mandatory" aria-label="required">
+            {' '}*{' '}
+          </abbr> 
           <input type="text" name="author" required />
         </p>
         <p>Number of pages: 
-          <abbr title="This field is mandatory" aria-label="required">*</abbr> 
+          <abbr title="This field is mandatory" aria-label="required">
+            {' '}*{' '}
+          </abbr> 
           <input type="number" name="pages" min="1" required />
         </p>
         <p>Have you read it yet? 
-          <abbr title="This field is mandatory" aria-label="required">*</abbr>
+          <abbr title="This field is mandatory" aria-label="required">
+            {' '}*{' '}
+          </abbr> 
           <input type="radio" name="read" value="Yes" required />
           <label htmlFor="yes">Yes</label>
           <input type="radio" name="read" value="No" required />
