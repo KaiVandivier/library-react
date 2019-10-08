@@ -7,7 +7,8 @@ import './App.css';
 class App extends Component {
   // load library from storage in constructor?
   state = {
-    library: this.sampleLib()
+    library: this.sampleLib(),
+    formOpen: true,
   }
 
   sampleLib() { // temporary for testing
@@ -57,6 +58,11 @@ class App extends Component {
     })
   }
 
+  toggleForm = () => {
+    this.setState({
+      formOpen: !this.state.formOpen
+    });
+  }
 
   render() {
     return (
@@ -72,8 +78,11 @@ class App extends Component {
         />
         
         <div id="form-wrapper">
-          <button onClick={ () => {} /* todo */}>{/* new book */}New Book</button>
-          <NewBookForm submitForm={this.submitForm}/>
+          <button onClick={() => this.toggleForm()}>New Book</button>
+          {
+            this.state.formOpen 
+            && <NewBookForm submitForm={this.submitForm}/>
+          }
         </div>
       </div>
     );
