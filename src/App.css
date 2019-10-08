@@ -1,22 +1,71 @@
-.App {
+/* Page styles */
+
+h1 {
+  text-align: center;
+  font-weight: 500;
+  letter-spacing: 5px;
+  font-family: 'EB Garamond', serif;
+}
+
+body {
+  margin: 0 auto;
+  max-width: 800px;
+}
+
+
+/* Table styles */
+
+table {
+  table-layout: fixed;
+  width: 100%;
+  border-collapse: collapse;
+}
+
+thead th:nth-child(1) {
+  width: 25%;
+}
+
+thead th:nth-child(2) {
+  width: 20%;
+}
+
+thead th:nth-child(3) {
+  width: 10%;
+}
+
+thead th:nth-child(4) {
+  width: 20%;
+}
+
+thead th:nth-child(5) {
+  width: 15%
+}
+
+th, td {
+  padding: 10px;
+  text-align: center;
+  border-left: 1px solid black;
+}
+
+th:first-child, td:first-child {
+  border-left: none;
+}
+
+td.title {
+  font-style: italic;
+}
+
+td.read:hover {
+  background-color: lightgrey;
+}
+
+/* Form styles */
+
+#form-wrapper {
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
+.hidden {
+  display: none;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #09d3ac;
-}
