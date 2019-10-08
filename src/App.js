@@ -42,6 +42,19 @@ class App extends Component {
     })
   }
 
+  toggleRead(i) {
+    const { library } = this.state
+    const newLibrary = library.map((book, idx) => {
+      if (idx === i) {
+        book.read = (book.read === "Yes") ? "No" : "Yes";
+      }
+      return book;
+    });
+    this.setState({
+      library: newLibrary
+    });
+  }
+
   render() {
     return (
       <div className="App">
@@ -52,6 +65,7 @@ class App extends Component {
         <LibraryTable 
           library={this.state.library}
           deleteBook={this.deleteBook.bind(this)}
+          toggleRead={this.toggleRead.bind(this)}
         />
         
         <div id="form-wrapper">
@@ -69,14 +83,14 @@ class BookRow extends Component {
   // Use a unique key from "React.Children.map"?
 
   render() {
-    const { book, i, deleteBook } = this.props;
+    const { book, i, deleteBook, toggleRead } = this.props;
 
     return (
       <tr>
         <td>{ book.title }</td>
         <td>{ book.author }</td>
         <td>{ book.pages }</td>
-        <td>{ book.read }</td> 
+        <td onClick={() => toggleRead(i)}>{ book.read }</td> 
         <td><button onClick={() => deleteBook(i)}>Delete Book</button></td>
       </tr>
     );
@@ -93,9 +107,22 @@ class LibraryTable extends Component {
   }
 
   render() {
-    const { library, deleteBook } = this.props;
+    const { 
+      library,
+      deleteBook,
+      toggleRead
+    } = this.props;
+
     const bookRows = library.map((book, i) => {
-      return <BookRow book={book} key={i} i={i} deleteBook={deleteBook} />
+      return (
+        <BookRow 
+          book={book} 
+          key={i} 
+          i={i} 
+          deleteBook={deleteBook}
+          toggleRead={toggleRead}
+        />
+      );
     }); // Option: set key to book.name, then search by that later?
 
 
