@@ -17,12 +17,16 @@ class Book {
 }
 
 class App extends Component {
-  constructor(props) {
-    super(props)
+  // load library from storage in constructor?
 
-    this.state = {
-      library: [] // todo: get from storage
-    }
+  sampleLib() { // temporary for testing
+    const hobbit = new Book("The Hobbit", "J. R. R. Tolkein", 295, "No");
+    const eden = new Book("East of Eden", "John Steinbeck", 601, 'Yes');
+    const steppenwolf = new Book("Steppenwolf", "Herman Hesse", 237, 'Yes');
+    const issueAtHand = new Book("The Issue at Hand", "Gil Fronsdal", 161, 'Yes');
+    const library = [];
+    library.push(hobbit, eden, steppenwolf, issueAtHand);
+    return library; // Optional: .map((book) => JSON.stringify(book));
   }
 
   render() {
@@ -32,7 +36,7 @@ class App extends Component {
           <h1>Library</h1>
         </header>
   
-        <LibraryTable />
+        <LibraryTable library={this.sampleLib()}/>
         
         <div id="form-wrapper">
           <button onClick={ () => {} /* todo */}>{/* new book */}New Book</button>
@@ -65,15 +69,6 @@ class BookRow extends Component {
 
 class LibraryTable extends Component {
   // should this hold a "book" state to facilitate deletion?
-  sampleLib() {
-    const hobbit = new Book("The Hobbit", "J. R. R. Tolkein", 295, "No");
-    const eden = new Book("East of Eden", "John Steinbeck", 601, 'Yes');
-    const steppenwolf = new Book("Steppenwolf", "Herman Hesse", 237, 'Yes');
-    const issueAtHand = new Book("The Issue at Hand", "Gil Fronsdal", 161, 'Yes');
-    const library = [];
-    library.push(hobbit, eden, steppenwolf, issueAtHand);
-    return library; // Optional: .map((book) => JSON.stringify(book));
-  }
 
   mapTitlesToHeaders(title) {
     return (
@@ -82,8 +77,9 @@ class LibraryTable extends Component {
   }
 
   render() {
-    const books = this.sampleLib(); // Change later for this.props.library
-    const bookRows = books.map((book, i) => <BookRow book={book} key={i} />);
+    const { library } = this.props;
+    const bookRows = library.map((book, i) => <BookRow book={book} key={i} />);
+    // set key to book.name, then search by that later?
 
     const columnTitles = [
       "Title",
