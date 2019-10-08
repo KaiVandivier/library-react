@@ -18,6 +18,9 @@ class Book {
 
 class App extends Component {
   // load library from storage in constructor?
+  state = {
+    library: this.sampleLib()
+  }
 
   sampleLib() { // temporary for testing
     const hobbit = new Book("The Hobbit", "J. R. R. Tolkein", 295, "No");
@@ -29,6 +32,16 @@ class App extends Component {
     return library; // Optional: .map((book) => JSON.stringify(book));
   }
 
+  deleteBook(i) { // Optional: pass a book as argument; delete using "findIndex"
+    const { library } = this.state
+    const newLibrary = library.filter((book, idx) => {
+      return i !== idx;
+    })
+    this.setState({
+      library: newLibrary
+    })
+  }
+
   render() {
     return (
       <div className="App">
@@ -36,7 +49,10 @@ class App extends Component {
           <h1>Library</h1>
         </header>
   
-        <LibraryTable library={this.sampleLib()}/>
+        <LibraryTable 
+          library={this.state.library}
+          deleteBook={this.deleteBook.bind(this)}
+        />
         
         <div id="form-wrapper">
           <button onClick={ () => {} /* todo */}>{/* new book */}New Book</button>
@@ -53,7 +69,7 @@ class BookRow extends Component {
   // Use a unique key from "React.Children.map"?
 
   render() {
-    const { book} = this.props;
+    const { book, i, deleteBook } = this.props;
 
     return (
       <tr>
@@ -61,7 +77,7 @@ class BookRow extends Component {
         <td>{ book.author }</td>
         <td>{ book.pages }</td>
         <td>{ book.read }</td> 
-        <td><button>Delete Book</button></td>
+        <td><button onClick={() => deleteBook(i)}>Delete Book</button></td>
       </tr>
     );
   }
@@ -77,9 +93,11 @@ class LibraryTable extends Component {
   }
 
   render() {
-    const { library } = this.props;
-    const bookRows = library.map((book, i) => <BookRow book={book} key={i} />);
-    // set key to book.name, then search by that later?
+    const { library, deleteBook } = this.props;
+    const bookRows = library.map((book, i) => {
+      return <BookRow book={book} key={i} i={i} deleteBook={deleteBook} />
+    }); // Option: set key to book.name, then search by that later?
+
 
     const columnTitles = [
       "Title",
