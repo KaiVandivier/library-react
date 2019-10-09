@@ -90,7 +90,8 @@ class NewBookForm extends Component {
           />
           <label htmlFor="no">No</label>
         </p>
-        <input type="submit" value="Save Book" />
+        {/* <input type="submit" value="Save Book" /> */}
+        <button>Save Book</button>
       </form>
     );
   }

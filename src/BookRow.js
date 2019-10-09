@@ -10,10 +10,10 @@ class BookRow extends Component {
 
     return (
       <tr>
-        <td>{ book.title }</td>
+        <td className="title">{ book.title }</td>
         <td>{ book.author }</td>
         <td>{ book.pages }</td>
-        <td onClick={() => toggleRead(i)}>{ book.read }</td> 
+        <td className="read" onClick={() => toggleRead(i)}>{ book.read }</td> 
         <td><button onClick={() => deleteBook(i)}>Delete Book</button></td>
       </tr>
     );

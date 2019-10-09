@@ -8,7 +8,7 @@ class App extends Component {
   // load library from storage in constructor?
   state = {
     library: this.sampleLib(),
-    formOpen: true,
+    formOpen: false,
   }
 
   sampleLib() { // temporary for testing
@@ -54,7 +54,8 @@ class App extends Component {
       read.value
     );
     this.setState({
-      library: [...this.state.library, newBook]
+      library: [...this.state.library, newBook],
+      formOpen: false,
     })
   }
 
