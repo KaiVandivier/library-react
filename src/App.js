@@ -31,13 +31,12 @@ class App extends Component {
   }
 
   sampleLib() {
-    const hobbit = new Book("The Hobbit", "J. R. R. Tolkein", 295, "No");
-    const eden = new Book("East of Eden", "John Steinbeck", 601, 'Yes');
-    const steppenwolf = new Book("Steppenwolf", "Herman Hesse", 237, 'Yes');
-    const issueAtHand = new Book("The Issue at Hand", "Gil Fronsdal", 161, 'Yes');
-    const library = [];
-    library.push(hobbit, eden, steppenwolf, issueAtHand);
-    return library; // Optional: .map((book) => JSON.stringify(book));
+    return [ 
+      new Book("The Hobbit", "J. R. R. Tolkein", 295, "No"),
+      new Book("East of Eden", "John Steinbeck", 601, 'Yes'),
+      new Book("Steppenwolf", "Herman Hesse", 237, 'Yes'),
+      new Book("The Issue at Hand", "Gil Fronsdal", 161, 'Yes'),
+    ];
   }
 
   deleteBook = (i) => { // Optional: pass a book as argument; delete using "findIndex"
