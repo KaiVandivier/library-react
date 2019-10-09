@@ -5,13 +5,32 @@ import NewBookForm from './NewBookForm';
 import './App.css';
 
 class App extends Component {
-  // load library from storage in constructor?
-  state = {
-    library: this.sampleLib(),
-    formOpen: false,
+  constructor(props) {
+    super(props);
+
+    const library = this.loadLibrary();
+
+    this.state = {
+      library: library,
+      formOpen: false,
+    }
   }
 
-  sampleLib() { // temporary for testing
+  componentDidUpdate = () => {
+    this.updateStorage();
+  }
+
+  updateStorage = () => {
+    localStorage.setItem('library', JSON.stringify(this.state.library))
+  }
+
+  loadLibrary = () => {
+    if (!localStorage.getItem('library')) 
+      return this.sampleLib();
+    return JSON.parse(localStorage.getItem('library'));
+  }
+
+  sampleLib() {
     const hobbit = new Book("The Hobbit", "J. R. R. Tolkein", 295, "No");
     const eden = new Book("East of Eden", "John Steinbeck", 601, 'Yes');
     const steppenwolf = new Book("Steppenwolf", "Herman Hesse", 237, 'Yes');
